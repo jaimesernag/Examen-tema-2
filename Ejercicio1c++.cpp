@@ -43,4 +43,15 @@ int main() {
 
     return 0;
 
+    struct Materia {
+        char nombre[20];
+    };
 
+
+    struct Estudiante {
+        char nombre[20];
+        int edad;
+        float promedio;
+        struct Materia* materias;
+        int cantidadMaterias;
+    };
