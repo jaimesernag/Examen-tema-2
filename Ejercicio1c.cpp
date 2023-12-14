@@ -1,21 +1,16 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
-void mostrarEstudiante(struct Estudiante estudiante) {
-    printf("Nombre: %s\n", estudiante.nombre);
-    printf("Edad: %d\n", estudiante.edad);
-    printf("Promedio: %.2f\n", estudiante.promedio);
-}
-int main() {
-    struct Estudiante alumno = {"Juan", 20, 85.5};
-    printf("Detalles del estudiante:\n");
-    mostrarEstudiante(alumno);
-
-    return 0;
-}
 #define MAX_MATERIAS 10
 #define MAX_NOMBRE 50
+#define MAX_ASISTENCIAS 50
+
+
+struct Asistencia {
+    char fecha[MAX_NOMBRE];
+    char materia[MAX_NOMBRE];
+    char estado[MAX_NOMBRE];
+};
 
 struct Estudiante {
     char nombre[MAX_NOMBRE];
@@ -23,82 +18,56 @@ struct Estudiante {
     float promedio;
     char materias[MAX_MATERIAS][MAX_NOMBRE];
     int cantidadMaterias;
-    id asistencias;
+    struct Asistencia asistencias[MAX_ASISTENCIAS];
+    int cantidadAsistencias;
 };
-void mostrarMaterias(struct Estudiante estudiante) {
-    printf("Materias inscritas por %s:\n", estudiante.nombre);
-    if (estudiante.cantidadMaterias == 0) {
-        printf("El estudiante no está inscrito en ninguna materia.\n");
-    } else {
-        for (int i = 0; i < estudiante.cantidadMaterias; i++) {
-            printf("- %s\n", estudiante.materias[i]);
-        }
-    }
-}
-void agregarMateria(struct Estudiante *estudiante, const char *nombreMateria) {
+
+int agregarMateria(struct Estudiante *estudiante, const char *nombreMateria) {
     if (estudiante->cantidadMaterias < MAX_MATERIAS) {
         strcpy(estudiante->materias[estudiante->cantidadMaterias], nombreMateria);
         estudiante->cantidadMaterias++;
+        return 1; // Éxito al agregar la materia
     } else {
-        printf("El estudiante ha alcanzado el límite de materias.\n");
+        return 0; // Error: límite de materias alcanzado
     }
 }
 
-// Función para eliminar una materia del estudiante
-void eliminarMateria(struct Estudiante *estudiante, const char *nombreMateria) {
+int registrarAsistencia(struct Estudiante *estudiante, const char *fecha, const char *materia, const char *estado) {
+    int materiaEncontrada = 0;
     for (int i = 0; i < estudiante->cantidadMaterias; i++) {
-        if (strcmp(estudiante->materias[i], nombreMateria) == 0) {
-            for (int j = i; j < estudiante->cantidadMaterias - 1; j++) {
-                strcpy(estudiante->materias[j], estudiante->materias[j + 1]);
-            }
-            estudiante->cantidadMaterias--;
+        if (strcmp(estudiante->materias[i], materia) == 0) {
+            materiaEncontrada = 1;
             break;
         }
+    }
+    if (materiaEncontrada && estudiante->cantidadAsistencias < MAX_ASISTENCIAS) {
+        strcpy(estudiante->asistencias[estudiante->cantidadAsistencias].fecha, fecha);
+        strcpy(estudiante->asistencias[estudiante->cantidadAsistencias].materia, materia);
+        strcpy(estudiante->asistencias[estudiante->cantidadAsistencias].estado, estado);
+        estudiante->cantidadAsistencias++;
+        return 1; // Éxito al registrar la asistencia
+    } else {
+        return 0; // Error: materia no encontrada o límite de asistencias alcanzado
     }
 }
 
 int main() {
-    struct Estudiante alumno = {"Juan", 20, 85.5, {{"Matemáticas"}, {"Física"}, {"Historia"}}, 3};
+    struct Estudiante alumno = {"Jaime", 19, 86.5, {}, 0, {}, 0};
 
-    mostrarMaterias(alumno);
+    // Agregar materias al estudiante
+    if (!agregarMateria(&alumno, "Fisica")) {
+        printf("Error: Límite de materias alcanzado\n");
+    }
+    if (!agregarMateria(&alumno, "Historia")) {
+        printf("Error: Límite de materias alcanzado\n");
+    }
 
-    agregarMateria(&alumno, "Química");
-
-    printf("\nDespués de agregar una materia:\n");
-    mostrarMaterias(alumno);
-
-    eliminarMateria(&alumno, "Física");
-
-    printf("\nDespués de eliminar una materia:\n");
-    mostrarMaterias(alumno);
+    if (!registrarAsistencia(&alumno, "2023-12-01", "Fisica", "Asistio")) {
+        printf("Error: Materia no encontrada o límite de asistencias alcanzado\n");
+    }
+    if (!registrarAsistencia(&alumno, "2023-12-03", "Matematicas", "Falta")) {
+        printf("Error: Materia no encontrada o límite de asistencias alcanzado\n");
+    }
 
     return 0;
-}
-#define MAX_ASISTENCIAS 50
-#define MAX_NOMBRE 50
-
-struct Asistencia {
-    char fecha[MAX_NOMBRE];
-    char materia[MAX_NOMBRE];
-    char estado[MAX_NOMBRE];
-};
-struct Estudiante {
-    char nombre[MAX_NOMBRE];
-    int edad;
-    float promedio;
-    struct Asistencia asistencias[MAX_ASISTENCIAS];
-    int cantidadAsistencias;
-};
-void mostrarAsistencias(struct Estudiante estudiante) {
-    printf("Asistencias de %s:\n", estudiante.nombre);
-    if (estudiante.cantidadAsistencias == 0) {
-        printf("El estudiante no tiene registros de asistencia.\n");
-    } else {
-        for (int i = 0; i < estudiante.cantidadAsistencias; i++) {
-            printf("- Fecha: %s, Materia: %s, Estado: %s\n",
-                   estudiante.asistencias[i].fecha,
-                   estudiante.asistencias[i].materia,
-                   estudiante.asistencias[i].estado);
-        }
-    }
 }
