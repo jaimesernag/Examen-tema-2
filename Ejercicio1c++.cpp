@@ -109,3 +109,13 @@ int main() {
             cout << "Estado: " << estado << endl;
         }
     };
+    class Estudiante {
+    private:
+        string nombre;
+        int edad;
+        float promedio;
+        vector<Asistencia> asistencias;
+
+    public:
+        Estudiante(string nombre, int edad, float promedio)
+                : nombre(nombre), edad(edad), promedio(promedio) {}
