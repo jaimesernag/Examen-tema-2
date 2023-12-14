@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 using namespace std;
-
+#GESTION DE MATERIAS
 struct Materia {
     string nombre;
 };
@@ -42,7 +42,7 @@ int main() {
     mostrarMaterias(estudiante);
 
     return 0;
-
+#REGISTRO DE ASISTENCIA
     struct Materia {
         char nombre[20];
     };
