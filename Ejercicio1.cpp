@@ -21,7 +21,13 @@ void mostrarMaterias(const Estudiante& estudiante) {
     }
 }
 
-void agregarMateria(Estudiante& estudiante, const std::string& nombreMateria) {
+void agregarMateria(Estudiante& estudiante, const string& nombreMateria) {
     Materia nuevaMateria {nombreMateria};
     estudiante.materias.push_back(nuevaMateria);
+}
+void eliminarMateria(Estudiante& estudiante, const string& nombreMateria) {
+    estudiante.materias.erase(remove_if(estudiante.materias.begin(), estudiante.materias.end(),
+                                             [&nombreMateria](const Materia& materia) {
+                                                 return materia.nombre == nombreMateria;
+                                             }), estudiante.materias.end());
 }
