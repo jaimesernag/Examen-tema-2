@@ -54,7 +54,6 @@ int registrarAsistencia(struct Estudiante *estudiante, const char *fecha, const 
 int main() {
     struct Estudiante alumno = {"Jaime", 19, 86.5, {}, 0, {}, 0};
 
-    // Agregar materias al estudiante
     if (!agregarMateria(&alumno, "Fisica")) {
         printf("Error: Límite de materias alcanzado\n");
     }
