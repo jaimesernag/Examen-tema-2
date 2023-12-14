@@ -93,3 +93,12 @@ int main() {
 
         return 0;
     }
+    class Asistencia {
+    private:
+        string fecha;
+        string materia;
+        string estado;
+
+    public:
+        Asistencia(string fecha, string materia, string estado)
+                : fecha(fecha), materia(materia), estado(estado) {}
