@@ -31,3 +31,16 @@ void eliminarMateria(Estudiante& estudiante, const string& nombreMateria) {
                                                  return materia.nombre == nombreMateria;
                                              }), estudiante.materias.end());
 }
+int main() {
+    Estudiante estudiante {"Jaime", 19, 85.0f};
+    agregarMateria(estudiante, "Fisica");
+    agregarMateria(estudiante, "Historia");
+    mostrarMaterias(estudiante);
+
+    eliminarMateria(estudiante, "Historia");
+    cout << "\nDespués de eliminar la materia 'Historia':\n";
+    mostrarMaterias(estudiante);
+
+    return 0;
+
+
