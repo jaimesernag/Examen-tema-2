@@ -135,3 +135,12 @@ void mostrarAsistencias() {
     }
 }
 };
+int main() {
+    Estudiante estudiante("Juan", 20, 85.5f);
+    estudiante.registrarAsistencia("2023-12-01", "Fisica", "Asistió");
+    estudiante.registrarAsistencia("2023-12-03", "Historia", "Falta");
+
+    estudiante.mostrarAsistencias();
+
+    return 0;
+}
