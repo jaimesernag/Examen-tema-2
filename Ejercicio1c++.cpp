@@ -42,7 +42,7 @@ int main() {
     mostrarMaterias(estudiante);
 
     return 0;
-
+#REGISTRO DE ASISTENCIA
     struct Materia {
         char nombre[20];
     };
