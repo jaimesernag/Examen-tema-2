@@ -119,3 +119,19 @@ int main() {
     public:
         Estudiante(string nombre, int edad, float promedio)
                 : nombre(nombre), edad(edad), promedio(promedio) {}
+
+            }
+        }
+void registrarAsistencia(string fecha,string materia,string estado) {
+    Asistencia nuevaAsistencia(fecha, materia, estado);
+    asistencias.push_back(nuevaAsistencia);
+}
+
+void mostrarAsistencias() {
+    std::cout << "Asistencias de " << nombre << ":\n";
+    for (const auto& asistencia : asistencias) {
+        asistencia.mostrarAsistencia();
+        cout << endl;
+    }
+}
+};
