@@ -102,3 +102,10 @@ int main() {
     public:
         Asistencia(string fecha, string materia, string estado)
                 : fecha(fecha), materia(materia), estado(estado) {}
+
+        void mostrarAsistencia() {
+            cout << "Fecha: " << fecha << endl;
+            cout << "Materia: " << materia << endl;
+            cout << "Estado: " << estado << endl;
+        }
+    };
