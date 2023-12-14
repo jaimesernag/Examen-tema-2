@@ -12,5 +12,16 @@ struct Estudiante {
     string nombre;
     int edad;
     float promedio;
-    vector<Materia> materias; // Vector de materias
+    vector<Materia> materias;
 };
+void mostrarMaterias(const Estudiante& estudiante) {
+    cout << "Materias inscritas por " << estudiante.nombre << ":" << std::endl;
+    for (const auto& materia : estudiante.materias) {
+        cout << "- " << materia.nombre << endl;
+    }
+}
+
+void agregarMateria(Estudiante& estudiante, const std::string& nombreMateria) {
+    Materia nuevaMateria {nombreMateria};
+    estudiante.materias.push_back(nuevaMateria);
+}
