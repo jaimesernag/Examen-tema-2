@@ -67,3 +67,15 @@ int main() {
         strcpy(estudiante->materias[estudiante->cantidadMaterias].nombre, nombreMateria);
         estudiante->cantidadMaterias++;
     }
+    void eliminarMateria(struct Estudiante* estudiante, const char* nombreMateria) {
+        for (int i = 0; i < estudiante->cantidadMaterias; ++i) {
+            if (strcmp(estudiante->materias[i].nombre, nombreMateria) == 0) {
+                for (int j = i; j < estudiante->cantidadMaterias - 1; ++j) {
+                    strcpy(estudiante->materias[j].nombre, estudiante->materias[j + 1].nombre);
+                }
+                estudiante->cantidadMaterias--;
+                estudiante->materias = realloc(estudiante->materias, estudiante->cantidadMaterias * sizeof(struct Materia));
+                break;
+            }
+        }
+    }
