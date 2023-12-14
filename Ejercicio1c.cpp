@@ -6,6 +6,8 @@ struct Estudiante {
     char nombre[50];
     int edad;
     float promedio;
+    int cantidadMaterias;
+    id materias;
 };
 
 void mostrarEstudiante(struct Estudiante estudiante) {
@@ -30,4 +32,14 @@ struct Estudiante {
     char materias[MAX_MATERIAS][MAX_NOMBRE];
     int cantidadMaterias;
 };
+void mostrarMaterias(struct Estudiante estudiante) {
+    printf("Materias inscritas por %s:\n", estudiante.nombre);
+    if (estudiante.cantidadMaterias == 0) {
+        printf("El estudiante no está inscrito en ninguna materia.\n");
+    } else {
+        for (int i = 0; i < estudiante.cantidadMaterias; i++) {
+            printf("- %s\n", estudiante.materias[i]);
+        }
+    }
+}
 
