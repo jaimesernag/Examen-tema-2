@@ -55,3 +55,15 @@ int main() {
         struct Materia* materias;
         int cantidadMaterias;
     };
+    void mostrarMaterias(const struct Estudiante* estudiante) {
+        printf("Materias inscritas por %s:\n", estudiante->nombre);
+        for (int i = 0; i < estudiante->cantidadMaterias; ++i) {
+            printf("- %s\n", estudiante->materias[i].nombre);
+        }
+    }
+
+    void agregarMateria(struct Estudiante* estudiante, const char* nombreMateria) {
+        estudiante->materias = realloc(estudiante->materias, (estudiante->cantidadMaterias + 1) * sizeof(struct Materia));
+        strcpy(estudiante->materias[estudiante->cantidadMaterias].nombre, nombreMateria);
+        estudiante->cantidadMaterias++;
+    }
