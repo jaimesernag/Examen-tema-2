@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 using namespace std;
-
+#GESTION DE MATERIAS
 struct Materia {
     string nombre;
 };
