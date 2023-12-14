@@ -79,3 +79,17 @@ int main() {
             }
         }
     }
+    int main() {
+        struct Estudiante estudiante = {"Jaime", 22, 85.0f, NULL, 0};
+        agregarMateria(&estudiante, "Fisica");
+        agregarMateria(&estudiante, "Historia");
+        mostrarMaterias(&estudiante);
+
+        eliminarMateria(&estudiante, "Historia");
+        printf("\nDespués de eliminar la materia 'Historia':\n");
+        mostrarMaterias(&estudiante);
+
+        free(estudiante.materias);
+
+        return 0;
+    }
